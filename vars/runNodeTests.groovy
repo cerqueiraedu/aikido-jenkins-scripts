@@ -5,11 +5,11 @@
  * @param 
  * @return
  */
-def call(String appName, String imageVersion, String testResultsPath) {
+def call(String appName, String testResultsPath) {
     try {
         sh "docker volume create test-results"
         sh "mkdir '${testResultsPath}'"
-        sh "docker run --name ${appName}-test-runner -v test-results:/build ecerqueira/${appName}:${imageVersion} npm run test-jenkins"
+        sh "docker run --name ${appName}-test-runner -v test-results:/build ecerqueira/${appName} npm run test-jenkins"
         sh "docker cp ${appName}-test-runner:/build/test-results.xml '${testResultsPath}/test-results.xml'"
     }
     catch(ex){
