@@ -12,7 +12,7 @@ def call(String chartRepo, String namespace, String releasePrefix, String appNam
         sh "helm upgrade --install --namespace ${namespace} --wait ${releasePrefix}-${appName} ${chartRepo}/${appName}"
     }
     catch(ex){
-        throw ex
+        sh "helm upgrade --install --namespace ${namespace} --wait ${releasePrefix}-${appName} ${chartRepo}/${appName}"
     }
 }
 
